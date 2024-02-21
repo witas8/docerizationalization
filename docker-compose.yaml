@@ -5,16 +5,16 @@ services:
     image: docerizationalization-jim
     ports:
       - "8081:8081"
-#    networks:
-#      - my-network
+    networks:
+      - my-network
   beam:
     container_name: beam-container
     image: docerizationalization-beam
     ports:
       - "8082:8082"
-#    networks:
-#      - my-network
+    networks:
+      - my-network
 
-#networks:
-#  my-network:
-#    driver: bridge
+networks:
+  my-network:
+    driver: bridge

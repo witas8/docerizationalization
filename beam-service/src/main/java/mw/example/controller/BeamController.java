@@ -19,7 +19,7 @@ public class BeamController {
     public ResponseEntity<String> ask(){
 
         ResponseEntity<String> response = restTemplate.exchange(
-                "http://192.168.88.199:8081/jim/drink/answer",
+                "http://jim:8081/jim/drink/answer",
                 HttpMethod.GET,
                 null,
                 String.class
