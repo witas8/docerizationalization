@@ -9,20 +9,20 @@
         <version>0.0.1-SNAPSHOT</version>
     </parent>
 
-    <artifactId>jim-service</artifactId>
+    <artifactId>eureka-server</artifactId>
 
     <packaging>jar</packaging>
     <build>
-        <finalName>jim-service-1</finalName>
+        <finalName>eureka-server-1</finalName>
     </build>
 
-    <dependencies>
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
-<!--            <version>4.1.0</version>-->
-        </dependency>
-    </dependencies>
+   <dependencies>
+       <dependency>
+           <groupId>org.springframework.cloud</groupId>
+           <artifactId>spring-cloud-starter-netflix-eureka-server</artifactId>
+<!--           <version>4.1.0</version>-->
+       </dependency>
+   </dependencies>
 
     <properties>
         <maven.compiler.source>20</maven.compiler.source>
