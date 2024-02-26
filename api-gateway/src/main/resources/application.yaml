@@ -1,19 +1,32 @@
 server:
-  port: 8081
+  port: 8091
 
 spring:
   application:
-    name: jim
+    name: api-gateway
   cloud:
+    gateway:
+      routes:
+        - id: jim-id
+          uri: lb://jim
+          predicates:
+            - Path=/jim/**
+        - id: beam-id
+          uri: lb://beam
+          predicates:
+            - Path=/beam/**
     loadbalancer:
+      enabled: true
+      strategy: RoundRobin
       health-check:
         enabled: true
-        interval: 5s
-        timeout: 2s
+        interval: 5s # Set a lower health check interval
+        timeout: 2s  # Set a lower health check timeout
 
 management:
   tracing:
     sampling:
+      #capture all traces that will be generated
       probability: 1.0
   endpoints:
     web:

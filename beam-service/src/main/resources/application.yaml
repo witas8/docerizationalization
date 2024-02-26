@@ -4,11 +4,31 @@ server:
 spring:
   application:
     name: beam
+  cloud:
+    loadbalancer:
+      health-check:
+        enabled: true
+        interval: 5s
+        timeout: 2s
+
+management:
+  tracing:
+    sampling:
+      #capture all traces that will be generated
+      probability: 1.0
+  endpoints:
+    web:
+      exposure:
+        include:
+          - prometheus
+          - health
+          - metrics
 
 eureka:
   client:
     service-url:
       defaultZone: http://eureka-server:8761/eureka
+      #defaultZone: http://localhost:8761/eureka
     fetch-registry: true
     register-with-eureka: true
     enabled: true

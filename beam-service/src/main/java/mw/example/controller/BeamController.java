@@ -7,27 +7,27 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.reactive.function.client.WebClient;
 
 @RestController
 @RequestMapping("/beam")
 @RequiredArgsConstructor
 public class BeamController {
 
-    private final RestTemplate restTemplate;
+    //private final RestTemplate restTemplate;
+    private final WebClient.Builder webClientBuilder;
 
     @GetMapping("/drink/question")
     public ResponseEntity<String> ask(){
-
-        ResponseEntity<String> response = restTemplate.exchange(
-//                "http://localhost:8081/jim/drink/answer",
-                "http://jim:8081/jim/drink/answer",
-//                "http://jim/jim/drink/answer",
-                HttpMethod.GET,
-                null,
-                String.class
-        );
-
-        return ResponseEntity.ok(response.getBody());
+        //"http://192.168.0.234:8081/jim/drink/answer",
+        //"http://localhost:8081/jim/drink/answer",
+        //"http://jim:8081/jim/drink/answer",
+        String response = webClientBuilder.build().get()
+                .uri("http://jim/jim/drink/answer")
+                .retrieve()
+                .bodyToMono(String.class)
+                .block();
+        return ResponseEntity.ok(response);
     }
 
     @GetMapping("/drink/answer")
