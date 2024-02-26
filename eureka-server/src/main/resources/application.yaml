@@ -6,6 +6,18 @@ spring:
     name: eureka-server
 
 eureka:
+#  instance:
+#    hostname: 192.168.0.234
+  server:
+    health-interval: 10 # Set a lower health check interval (in seconds)
+    lease-expiration-duration-in-seconds: 60 # Set a lower expiration time (in seconds)
+  instance:
+    lease-renewal-interval-in-seconds: 10 # Set a lower renewal interval
+    lease-expiration-duration-in-seconds: 20 # Set a lower expiration time (in seconds)
   client:
     fetch-registry: false
-    register-with-eureka: false
+    register-with-eureka: true
+    service-url:
+      #defaultZone: http://192.168.0.234:8761/eureka
+      #defaultZone: http://localhost:8761/eureka
+      defaultZone: http://eureka-server:8761/eureka

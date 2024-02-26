@@ -5,10 +5,10 @@ FROM openjdk:17-oracle
 WORKDIR /app
 
 # Copy the compiled JAR file into the container at /app
-COPY target/eureka-server-1.jar /app/app.jar
+COPY target/api-gateway-1.jar /app/app.jar
 
 # Expose the port the app runs on
-EXPOSE 8761
+EXPOSE 8091
 
 # Specify the command to run on container start
 CMD ["java", "-jar", "app.jar"]

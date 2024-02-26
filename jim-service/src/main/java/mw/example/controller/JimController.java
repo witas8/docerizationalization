@@ -1,33 +1,27 @@
 package mw.example.controller;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.client.RestTemplate;
+import org.springframework.web.reactive.function.client.WebClient;
 
 @RestController
 @RequestMapping("/jim")
 @RequiredArgsConstructor
 public class JimController {
-
-    private final RestTemplate restTemplate;
+    private final WebClient.Builder webClientBuilder;
 
     @GetMapping("/drink/question")
     public ResponseEntity<String> ask(){
 
-        ResponseEntity<String> response = restTemplate.exchange(
-//                "http://localhost:8082/beam/drink/answer",
-                "http://beam:8082/beam/drink/answer",
-//                "http://beam/beam/drink/answer",
-                HttpMethod.GET,
-                null,
-                String.class
-        );
-
-        return ResponseEntity.ok(response.getBody());
+        String response = webClientBuilder.build().get()
+                .uri("http://beam/beam/drink/answer")
+                .retrieve()
+                .bodyToMono(String.class)
+                .block();
+        return ResponseEntity.ok(response);
     }
 
     @GetMapping("/drink/answer")

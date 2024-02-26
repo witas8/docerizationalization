@@ -25,6 +25,15 @@ services:
       - "8761:8761"
     networks:
       - my-network
+  api-gateway:
+    image: docerizationalization-gateway
+    container_name: gateway-container
+    ports:
+      - "8091:8091"
+    networks:
+      - my-network
+    depends_on:
+      - eureka-server
 
 networks:
   my-network:
