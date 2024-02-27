@@ -6,9 +6,9 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 
 @SpringBootApplication
 @EnableDiscoveryClient
-public class JimService {
+public class BeamApplication {
     public static void main(String[] args) {
-        SpringApplication.run(JimService.class, args);
+        SpringApplication.run(BeamApplication.class, args);
     }
 
 }
