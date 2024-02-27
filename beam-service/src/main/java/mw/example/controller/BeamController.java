@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.reactive.function.client.WebClient;
+import mw.example.feign.client.beam.BeamOpenFeignResponse;
 
 @RestController
 @RequestMapping("/beam")
@@ -19,7 +20,6 @@ public class BeamController {
 
     @GetMapping("/drink/question")
     public ResponseEntity<String> ask(){
-        //"http://192.168.0.234:8081/jim/drink/answer",
         //"http://localhost:8081/jim/drink/answer",
         //"http://jim:8081/jim/drink/answer",
         String response = webClientBuilder.build().get()
@@ -35,4 +35,8 @@ public class BeamController {
         return ResponseEntity.ok("Beam wants to drink alcohol...");
     }
 
+    @GetMapping("/ready")
+    public BeamOpenFeignResponse isBeamReady(){
+        return BeamOpenFeignResponse.builder().isBeamReady(true).build();
+    }
 }
